@@ -12,21 +12,21 @@ class Expression(var infixExpression: MutableList<String>) {
             } else if (element == "(") {
                 stack.push(element)
             } else if (element == ")") {
-                while (stack.peek() != "(" && stack.isNotEmpty())
+                while (stack.peek() != "(" && stack.isNotEmpty()){
                     result += "${stack.pop()} "
             }
-            if (stack.isNotEmpty()) {
+            if (stack.isNotEmpty())
                 stack.pop()
-            } else {
-                while (stack.isNotEmpty() && precedence(stack.peek()) >= precedence(element))
-                    result += "${stack.pop()} "
-            }
+        } else {
+            while (stack.isNotEmpty() && precedence(stack.peek()) >= precedence(element)){
+                result += "${stack.pop()} "}
         }
-        while (stack.isNotEmpty()){
-            result += "${stack.pop()} "
-        }
-        return result
     }
+    while (stack.isNotEmpty()){
+        result += "${stack.pop()} "
+    }
+    return result
+}
 
     private fun precedence(operator: String): Int {
         return when (operator) {
